@@ -6,6 +6,11 @@
 </head>
 <body>
 
+<h1>SynthApp</h1>
+<p>Draw on the score and press play. Currently very buggy.</p>
+
+<canvas id="sequencer" width="800" height="200"></canvas>
+
 <section id="controls">
     <label>Type
         <select name="types" id="type-select">
@@ -56,10 +61,12 @@
 
 
     <button name="testBttn" id="testBttn">Test Note</button>
+    <button name="playBttn" id="playBttn">Play</button>
 </section>
 </body>
 
 <script type="text/javascript" src="Tone.js"></script>
+<script type="text/javascript" src="javascripts/canvas.js"></script>
 <script type="module" src="javascripts/main.js"></script>
 
 </html>
