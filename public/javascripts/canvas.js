@@ -9,30 +9,39 @@ const ctx = canvas.getContext('2d');
 // Notes on the score
 const keys = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
 
-// Draw a box around the canvas
-ctx.strokeRect(0, 0, 800, 200);
-ctx.font = '16px serif';
-ctx.strokeStyle = "grey";
+/**
+ * Create a blank score to draw on.
+ * @function drawBlankScore
+ */
+function drawBlankScore()   {
+    // Clear the canvas
+    ctx.clearRect(0, 0, 800, 200);
+    // Draw a box around the canvas
+    ctx.strokeRect(0, 0, 800, 200);
+    ctx.font = '16px serif';
+    ctx.strokeStyle = "grey";
 
-// Draw the beat divisions
-for (let x = 50; x < 800; x += 50)   {
-    ctx.beginPath();
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, 200);
-    ctx.closePath();
-    ctx.stroke();
+    // Draw the beat divisions
+    for (let x = 50; x < 800; x += 50)   {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, 200);
+        ctx.closePath();
+        ctx.stroke();
+    }
+
+    // Draw the note divisions
+    for (let y = 25; y <= 200; y += 25)  {
+        ctx.fillText(keys[(y/25)-1], 0, y);
+
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(800, y);
+        ctx.closePath();
+        ctx.stroke();
+    }
 }
 
-// Draw the note divisions
-for (let y = 25; y <= 200; y += 25)  {
-    ctx.fillText(keys[(y/25)-1], 0, y);
-
-    ctx.beginPath();
-    ctx.moveTo(0, y);
-    ctx.lineTo(800, y);
-    ctx.closePath();
-    ctx.stroke();
-}
 
 /**
  * Holds the values for a playable note.
@@ -221,6 +230,15 @@ class LineManager   {
             notes.push(note.toNote());
         }
         return notes;
+    }
+
+    /**
+     * Gets rid of stored lines, clearing the score.
+     * @fuction clearAll
+     * @memberof LineManager
+     */
+    clearAll()  {
+        this.lines.length = 0;
     }
 }
 

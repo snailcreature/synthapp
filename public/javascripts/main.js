@@ -21,6 +21,7 @@ const releaseCtl = document.querySelector("#releasectrl");
  */
 function loadpage() {
     Tone.start();
+    drawBlankScore();
 }
 
 /**
@@ -55,10 +56,20 @@ function playScore()    {
     part.start(0);
 }
 
+/**
+ * Clear the score for fresh masterpieces.
+ * @function clearScore
+ */
+function clearScore()   {
+    drawBlankScore();
+    lineman.clearAll();
+}
+
 // Set up event listeners
 // Buttons
 document.querySelector("#testBttn").addEventListener('click', playTone);
 document.querySelector("#playBttn").addEventListener('click', playScore);
+document.querySelector("#clearBttn").addEventListener('click', clearScore);
 
 // Control panel
 typeSelect.addEventListener('change', function ()   {
