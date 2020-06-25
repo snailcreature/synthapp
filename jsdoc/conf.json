@@ -1,11 +1,11 @@
 {
-  "plugins": [],
+  "plugins": ["plugins/markdown"],
   "recurseDepth": 10,
   "source": {
     "includePattern": ".+\\.js(doc|x)?$",
     "excludePattern": "(^|\\/|\\\\)_",
-    "inlcude": ["/public"],
-    "exclude": ["/node_modules"]
+    "inlcude": ["./public/javascripts"],
+    "exclude": ["./node_modules", "./public/docs"]
   },
   "sourceType": "module",
   "tags": {
@@ -15,6 +15,13 @@
   "templates": {
     "cleverLinks": false,
     "monospaceLinks": false
+  },
+  "opts": {
+    "template": "templates/default",  // same as -t templates/default
+    "encoding": "utf8",               // same as -e utf8
+    "destination": "./public/docs",          // same as -d ./out/
+    "recurse": true,                   // same as -r
+    "readme": "./jsdoc/README.md"
   }
 }
 

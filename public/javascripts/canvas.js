@@ -35,6 +35,26 @@ for (let y = 25; y <= 200; y += 25)  {
 }
 
 /**
+ * Holds the values for a playable note.
+ * @class
+ */
+class Note  {
+    /**
+     *
+     * @param {number} time - When the note will start.
+     * @param {String} note - The pitch to play.
+     * @param {number} length - How long to hold the note for.
+     * @param {number} velocity - How hard to play the note. Influences lifetime.
+     */
+    constructor(time, note, length, velocity)   {
+        this.time = time;
+        this.note = note;
+        this.length = length;
+        this.velocity = velocity;
+    }
+}
+
+/**
  * Holds the data for a line drawn on the score.
  * @class
  */
@@ -74,10 +94,10 @@ class NoteLine  {
      * Convert the line to a playable note object.
      * @function toNote
      * @memberof NoteLine
-     * @returns {{note: string, length: number, time: number, velocity: number}}
+     * @returns {Note}
      */
     toNote()    {
-        return {"time": this.getStartBeat(), "note": this.getKey(), "length": this.getNoteLength(), "velocity": 1};
+        return new Note(this.getStartBeat(), this.getKey(), this.getNoteLength(), 1);
     }
 
     /**
@@ -193,7 +213,7 @@ class LineManager   {
      * Convert all stored NotLine objects into playable note objects.
      * @function toNotes
      * @memberof LineManager
-     * @returns {{note: string, length: number, time: number, velocity: number}[]}
+     * @returns {Note[]}
      */
     toNotes()   {
         let notes = [];

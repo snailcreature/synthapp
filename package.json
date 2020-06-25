@@ -1,9 +1,8 @@
 {
-  "name": "untitled",
-  "version": "0.0.0",
+  "name": "SynthApp",
   "private": true,
   "scripts": {
-    "start": "jsdoc -c /jsdoc/conf.json -d docs; node ./bin/www"
+    "start": "jsdoc ./ -c ./jsdoc/conf.json; node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

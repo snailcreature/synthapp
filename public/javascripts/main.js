@@ -23,32 +23,44 @@ function loadpage() {
     Tone.start();
 }
 
-// Play a middle C on the synth
+/**
+ * Play a middle C using the synth.
+ * @function
+ */
 function playTone() {
     synth.triggerAttackRelease("C4", "4n");
 }
 
-
+/**
+ * Play the score that has been created on the canvas.
+ * @function
+ */
 function playScore()    {
+    // Stop the part from playing and reset the Transport
     part.stop(0);
     Tone.Transport.pause("+0.1");
     Tone.Transport.seconds = 0;
 
+    // Remove all notes from the part.
     part.removeAll();
 
+    // Get the current score on the canvas
     let score = lineman.toNotes();
-    let note;
-    for (note of score) {
+    for (const note of score) {
         part.add(note);
     }
 
+    // Restart the transport and play the score
     Tone.Transport.start("+0.1");
     part.start(0);
 }
 
+// Set up event listeners
+// Buttons
 document.querySelector("#testBttn").addEventListener('click', playTone);
 document.querySelector("#playBttn").addEventListener('click', playScore);
 
+// Control panel
 typeSelect.addEventListener('change', function ()   {
     synth.oscillator.type = typeSelect.value;
 });
