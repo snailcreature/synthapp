@@ -137,7 +137,6 @@ class LineManager   {
         let notes = [];
         for (let note of this.lines)    {
             notes.push(note.toNote());
-            console.log("AAAA")
         }
         return notes;
     }

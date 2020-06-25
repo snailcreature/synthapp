@@ -18,13 +18,6 @@ function loadpage() {
 }
 
 function playTone() {
-
-    synth.oscillator.type = typeSelect.value;
-    synth.envelope.attack = attackCtl.value;
-    synth.envelope.decay = decayCtl.value;
-    synth.envelope.sustain = sustainCtl.value;
-    synth.envelope.release = releaseCtl.value;
-
     synth.triggerAttackRelease("C4", "4n");
 }
 
@@ -47,6 +40,22 @@ function playScore()    {
 
 document.querySelector("#testBttn").addEventListener('click', playTone);
 document.querySelector("#playBttn").addEventListener('click', playScore);
+
+typeSelect.addEventListener('change', function ()   {
+    synth.oscillator.type = typeSelect.value;
+});
+attackCtl.addEventListener('change', function () {
+    synth.envelope.attack = attackCtl.value;
+});
+decayCtl.addEventListener('change', function ()  {
+    synth.envelope.decay = decayCtl.value;
+});
+sustainCtl.addEventListener('change', function ()   {
+    synth.envelope.sustain = sustainCtl.value;
+});
+releaseCtl.addEventListener('change', function ()   {
+    synth.envelope.release = releaseCtl.value;
+});
 
 window.addEventListener('load', loadpage);
 
