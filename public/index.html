@@ -6,10 +6,59 @@
 </head>
 <body>
 
-<button name="playBttn" id="playBttn">Click me!</button>
+<section id="controls">
+    <label>Type
+        <select name="types" id="type-select">
+            <optgroup label="Standard">
+                <option value="triangle" autofocus>Triangle</option>
+                <option value="sine">Sine</option>
+                <option value="square">Square</option>
+                <option value="sawtooth">Sawtooth</option>
+            </optgroup>
+            <optgroup label="FM">
+                <option value="fmtriangle">FMTriangle</option>
+                <option value="fmsine">FMSine</option>
+                <option value="fmsquare">FMSquare</option>
+                <option value="fmsawtooth">FMSawtooth</option>
+            </optgroup>
+            <optgroup label="AM">
+                <option value="amtriangle">AMTriangle</option>
+                <option value="amsine">AMSine</option>
+                <option value="amsquare">AMSquare</option>
+                <option value="amsawtooth">AMSawtooth</option>
+            </optgroup>
+            <optgroup label="FAT">
+                <option value="fattriangle">FATTriangle</option>
+                <option value="fatsine">FATSine</option>
+                <option value="fatsquare">FATSquare</option>
+                <option value="fatsawtooth">FATSawtooth</option>
+            </optgroup>
+            <optgroup label="Other">
+                <option value="pwm">PWM</option>
+                <option value="pulse">Pulse</option>
+            </optgroup>
+        </select>
+    </label>
+    <label>Envelope
+        <label>Attack
+            <input type="range" id="attackctrl" name="attack" min="0" max="1" step="0.001" value="0.005">
+        </label>
+        <label>Decay
+            <input type="range" id="decayctrl" name="decay" min="0" max="1" step="0.001" value="0.1">
+        </label>
+        <label>Sustain
+            <input type="range" id="sustainctrl" name="sustain" min="0" max="1" step="0.001" value="0.3">
+        </label>
+        <label>Release
+            <input type="range" id="releasectrl" name="release" min="0" max="1" step="0.001" value="1">
+        </label>
+    </label>
+
+
+    <button name="testBttn" id="testBttn">Test Note</button>
+</section>
 </body>
 
-<!--<script type="text/javascript" src="https://unpkg.com/tone@13.4.9/build/Tone.js"></script>-->
 <script type="text/javascript" src="Tone.js"></script>
 <script type="module" src="javascripts/main.js"></script>
 
