@@ -1,11 +1,22 @@
 'use strict';
 
 // Create the synth
-let synth = new Tone.Synth().toMaster();
+//let synth = new Tone.Synth().toMaster();
+const synth = new Tone.PolySynth(6, Tone.Synth);
+const masterVol = new Tone.Volume();
+synth.chain(masterVol, Tone.Master);
 // Create a part to play the notes using the synth
+let count = 0;
 const part = new Tone.Part(function(time, value){
     synth.triggerAttackRelease(value.note, value.length, time, value.velocity);
+    count++;
+    if (count >= this.length)   {
+        synth.releaseAll(`+${value.length}`);
+        count = 0;
+    }
 }, []);
+
+Tone.Transport.length = Tone.Time("8n")*16;
 
 // Store the control panel elements
 const typeSelect = document.querySelector("#type-select");
@@ -29,6 +40,7 @@ function loadpage() {
  * @function
  */
 function playTone() {
+    synth.releaseAll();
     synth.triggerAttackRelease("C4", "4n");
 }
 
@@ -61,6 +73,7 @@ function playScore()    {
  * @function clearScore
  */
 function clearScore()   {
+    synth.releaseAll();
     drawBlankScore();
     lineman.clearAll();
 }
@@ -73,19 +86,44 @@ document.querySelector("#clearBttn").addEventListener('click', clearScore);
 
 // Control panel
 typeSelect.addEventListener('change', function ()   {
-    synth.oscillator.type = typeSelect.value;
+    //synth.oscillator.type = typeSelect.value;
+    synth.set({
+        "oscillator": {
+            "type": typeSelect.value
+        }
+    });
 });
 attackCtl.addEventListener('change', function () {
-    synth.envelope.attack = attackCtl.value;
+    //synth.envelope.attack = attackCtl.value;
+    synth.set({
+        "envelope": {
+            "attack": attackCtl.value
+        }
+    });
 });
 decayCtl.addEventListener('change', function ()  {
-    synth.envelope.decay = decayCtl.value;
+    //synth.envelope.decay = decayCtl.value;
+    synth.set({
+        "envelope": {
+            "decay": decayCtl.value
+        }
+    });
 });
 sustainCtl.addEventListener('change', function ()   {
-    synth.envelope.sustain = sustainCtl.value;
+    //synth.envelope.sustain = sustainCtl.value;
+    synth.set({
+        "envelope": {
+            "sustain": sustainCtl.value
+        }
+    });
 });
 releaseCtl.addEventListener('change', function ()   {
-    synth.envelope.release = releaseCtl.value;
+    //synth.envelope.release = releaseCtl.value;
+    synth.set({
+        "envelope": {
+            "release": releaseCtl.value
+        }
+    });
 });
 
 window.addEventListener('load', loadpage);

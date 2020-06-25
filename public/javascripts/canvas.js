@@ -117,7 +117,6 @@ class NoteLine  {
      */
     getKey()    {
         let numKey = parseInt(this.startY/25);
-        console.log(numKey);
         return keys[numKey];
     }
 
