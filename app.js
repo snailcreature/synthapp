@@ -7,8 +7,6 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-//const tonejs = require('tone');
-
 var app = express();
 
 // view engine setup
