@@ -1,10 +1,13 @@
 'use strict';
 
+// Create the synth
 let synth = new Tone.Synth().toMaster();
+// Create a part to play the notes using the synth
 const part = new Tone.Part(function(time, value){
     synth.triggerAttackRelease(value.note, value.length, time, value.velocity);
 }, []);
 
+// Store the control panel elements
 const typeSelect = document.querySelector("#type-select");
 
 const attackCtl = document.querySelector("#attackctrl");
@@ -12,14 +15,19 @@ const decayCtl = document.querySelector("#decayctrl");
 const sustainCtl = document.querySelector("#sustainctrl");
 const releaseCtl = document.querySelector("#releasectrl");
 
+/**
+ * When the page loads, start Tone.js
+ * @function
+ */
 function loadpage() {
     Tone.start();
-    console.log("Audio ready");
 }
 
+// Play a middle C on the synth
 function playTone() {
     synth.triggerAttackRelease("C4", "4n");
 }
+
 
 function playScore()    {
     part.stop(0);
