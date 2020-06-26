@@ -127,7 +127,7 @@ class NoteLine  {
      * @returns {number}
      */
     getStartBeat()  {
-        return Tone.Time("8n")*parseInt(this.startX/50)+1;
+        return Tone.Time("8n")*parseInt(this.startX/50);
     }
 
     /**
@@ -137,7 +137,9 @@ class NoteLine  {
      * @returns {number}
      */
     getNoteLength() {
-        return Tone.Time("8n")*parseInt(((this.endX-this.startX)/50)+1);
+        let startBeat = parseInt(this.startX/50);
+        let endBeat = parseInt(this.endX/50);
+        return Tone.Time("8n")*(endBeat-startBeat);
     }
 }
 

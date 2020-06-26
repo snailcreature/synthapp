@@ -20,11 +20,16 @@ A ToneJS DAW webapp project.
  - [ ] Canvas optimisation
  - [ ] Value tuning/numerical input on sliders
  - [ ] Modals
+ - [ ] CSS. Lots and lots of CSS...
  
 ## Features
 
  - [ ] Instruments
     - [ ] Editing attributes
+        - [ ] Attack
+        - [ ] Sustain
+        - [ ] Decay
+        - [ ] Repitching
     - [ ] Named instruments
     - [ ] Samplers
         - [ ] Presets
@@ -46,6 +51,7 @@ A ToneJS DAW webapp project.
             - [ ] Mute/Solo
         - [ ] Instrument select
         - [ ] Sequencer
+        - [ ] Octave selection
  - [ ] Controls
     - [ ] EQ
     - [ ] Volume
