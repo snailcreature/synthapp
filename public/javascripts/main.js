@@ -1,5 +1,7 @@
 'use strict';
 
+// main.js should only contain eventlistener additions
+
 // Create the synth
 //let synth = new Tone.Synth().toMaster();
 const synth = new Tone.PolySynth(6, Tone.Synth);
@@ -45,7 +47,7 @@ function playTone() {
 }
 
 /**
- * Play the score that has been created on the canvas.
+ * Play the score that has been created on the canvasmanager.
  * @function
  */
 function playScore()    {
@@ -57,7 +59,7 @@ function playScore()    {
     // Remove all notes from the part.
     part.removeAll();
 
-    // Get the current score on the canvas
+    // Get the current score on the canvasmanager
     let score = lineman.toNotes();
     for (const note of score) {
         part.add(note);
