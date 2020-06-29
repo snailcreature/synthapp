@@ -1,13 +1,12 @@
 // Manager for tracks
 
 class Track {
-    let id;
+    id;
 
-    let instrument;
+    instrument;
 
-    let canvas;
-    let ctx;
-    let noteman;
+    score;
+    noteman;
 
     constructor(id) {
         this.id = id;
@@ -16,8 +15,9 @@ class Track {
 
     init()  {
         document.body.innerHTML += `<section class="track" id="tracksection-${this.id}"><canvas id="trackcanvas-${this.id}" width="${widthPerBeat}" height="${trackHeight}"></canvas></section>`;
-        this.canvas = document.querySelector(`#trackcanvas-${this.id}`);
-        this.ctx = this.canvas.getContext('2d');
+        canvas = document.querySelector(`#trackcanvas-${this.id}`);
+
+        this.score = new Score(canvas);
     }
 
 }

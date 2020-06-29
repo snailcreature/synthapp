@@ -3,10 +3,79 @@
 // canvasmanager.js should only contain rendering services
 
 // Canvas element
-const canvasmanager = document.querySelector("#sequencer");
+const canvas= document.querySelector("#sequencer");
 
 // Canvas rendering context
-const ctx = canvasmanager.getContext('2d');
+const ctx = canvas.getContext('2d');
+
+/**
+ * Score object for managing the canvas
+ * @class
+ */
+class Score {
+    canvas;
+    ctx;
+    lineman;
+
+    /**
+     *
+     * @param {Element} canvas - The canvas element to draw on.
+     */
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = this.canvas.getContext('2d');
+
+        this.lineman = new LineManager(this.ctx);
+
+        // Assign event listeners to the canvasmanager
+        this.canvas.addEventListener("mousemove", function (e) {
+            this.lineman.onMove(e);
+        }, false);
+        this.canvas.addEventListener("mousedown", function (e) {
+            this.lineman.onDown(e);
+        }, false);
+        this.canvas.addEventListener("mouseup", function (e) {
+            this.lineman.onUpOrOut(e);
+        }, false);
+        this.canvas.addEventListener("mouseout", function (e) {
+            this.lineman.onUpOrOut(e);
+        }, false);
+    }
+
+    /**
+     * Create a blank score to draw on.
+     * @function drawBlankScore
+     * @memberof Score
+     */
+    drawBlankScore()    {
+        let width = widthPerBeat * timeSig;
+        let division = widthPerBeat / resolution;
+        this.ctx.clearRect(0, 0, width, trackHeight);
+        this.ctz.strokeRect(0, 0, width, trackHeight);
+
+        this.ctx.font = '16px serif';
+        ctx.strokeStyle = 'grey';
+
+        for (let x = division; x < width; x += division)    {
+            this.ctx.beginPath();
+            this.ctx.moveTo(x, 0);
+            this.ctx.lineTo(x, 200);
+            this.ctx.closePath();
+            this.ctx.stroke();
+        }
+
+        for (let y = trackHeight/keys.length; y <= trackHeight; y += trackHeight/keys.length)   {
+            this.ctx.fillText(keys[(y/25)-1], 0, y);
+
+            this.ctx.beginPath();
+            this.ctx.moveTo(0, y);
+            this.ctx.lineTo(800, y);
+            this.ctx.closePath();
+            this.ctx.stroke();
+        }
+    }
+}
+
 
 /**
  * Create a blank score to draw on.
@@ -56,18 +125,28 @@ class LineManager   {
 
     currLine;
 
+    ctx;
+
+    /**
+     *
+     * @param {Object} context - The rendering context to draw with.
+     */
+    constructor(context)    {
+        this.ctx = context;
+    }
+
     /**
      * Draw the next line segment to the canvasmanager.
      * @function draw
      * @memberof LineManager
      */
     draw()  {
-        ctx.beginPath();
-        ctx.moveTo(this.prevX, this.prevY);
-        ctx.lineTo(this.currX, this.currY);
-        ctx.strokeStyle = "red";
-        ctx.stroke();
-        ctx.closePath();
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.prevX, this.prevY);
+        this.ctx.lineTo(this.currX, this.currY);
+        this.ctx.strokeStyle = "red";
+        this.ctx.stroke();
+        this.ctx.closePath();
     }
 
     /**
@@ -79,8 +158,8 @@ class LineManager   {
     onDown(e)  {
         this.prevX = this.currX;
         this.prevY = this.currY;
-        this.currX = e.clientX - canvasmanager.offsetLeft;
-        this.currY = e.clientY - canvasmanager.offsetTop;
+        this.currX = e.clientX - canvas.offsetLeft;
+        this.currY = e.clientY - canvas.offsetTop;
 
         this.flag = true;
 
@@ -108,8 +187,8 @@ class LineManager   {
         if (this.flag) {
             this.prevX = this.currX;
             this.prevY = this.currY;
-            this.currX = e.clientX - canvasmanager.offsetLeft;
-            this.currY = e.clientY - canvasmanager.offsetTop;
+            this.currX = e.clientX - canvas.offsetLeft;
+            this.currY = e.clientY - canvas.offsetTop;
             this.draw();
 
             this.currLine.addPoint(this.currX, this.currY);
@@ -142,18 +221,18 @@ class LineManager   {
 }
 
 // Main line manager object
-const lineman = new LineManager();
+const lineman = new LineManager(ctx);
 
 // Assign event listeners to the canvasmanager
-canvasmanager.addEventListener("mousemove", function (e) {
+canvas.addEventListener("mousemove", function (e) {
     lineman.onMove(e);
 }, false);
-canvasmanager.addEventListener("mousedown", function (e) {
+canvas.addEventListener("mousedown", function (e) {
     lineman.onDown(e);
 }, false);
-canvasmanager.addEventListener("mouseup", function (e) {
+canvas.addEventListener("mouseup", function (e) {
     lineman.onUpOrOut(e);
 }, false);
-canvasmanager.addEventListener("mouseout", function (e) {
+canvas.addEventListener("mouseout", function (e) {
     lineman.onUpOrOut(e);
 }, false);

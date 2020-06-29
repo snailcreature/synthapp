@@ -1,7 +1,5 @@
 // Holder for all note data
 
-// Notes on the score
-const keys = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
 
 /**
  * Holds the values for a playable note.

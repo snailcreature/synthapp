@@ -58,6 +58,7 @@ A ToneJS DAW webapp project.
     - [ ] Playback (play/pause, stop)
     - [ ] Resolution; "How many divisions in a bar?"
     - [ ] Time signature
+        - [ ] Bar recalc
     - [ ] Tempo
  - [ ] Exporting
     - [ ] Mixed piece as audio file
